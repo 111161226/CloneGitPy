@@ -43,6 +43,9 @@ def excecute(cmd):
             elif cmd[1] == "checkout":
                 if len(cmd) == 3:
                     repo.git.checkout(cmd[2])
+            elif cmd[1] == "merge":
+                if len(cmd) == 3:
+                    repo.index.merge_tree(cmd[2]).commit('merged')
                             
         print("excecute ", *cmd[0:])
 
