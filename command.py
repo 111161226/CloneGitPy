@@ -12,7 +12,7 @@ def excecute(cmd):
                 if cmd[2] == "-m" and len(cmd) >= 4:
                     mess = ""
                     for i in range(3, len(cmd)):
-                        mess+=cmd[i]
+                        mess+=cmd[i]+" "
                 else:
                     mess = "done commit"
                 repo.index.commit(mess)
@@ -28,6 +28,19 @@ def excecute(cmd):
                         repo.git.push('--delete', cmd[2], cmd[4])
                     else:
                         repo.git.push(cmd[2], cmd[3])
+            elif cmd[1] == "branch":
+                if len(cmd) == 3:
+                    repo.git.branch(cmd[2])
+                else:
+                    repo.git.branch()
+            elif cmd[1] == "log":  
+                for commit in repo.iter_commits("main"):
+                    print('|' * 55)
+                    print(commit.hexsha)
+                    print('|' * 55)
+                    for diff in commit.diff():
+                        print(diff)
+                            
         print("excecute ", *cmd[0:])
 
     else:
