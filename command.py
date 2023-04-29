@@ -40,6 +40,9 @@ def excecute(cmd):
                     print('|' * 55)
                     for diff in commit.diff():
                         print(diff)
+            elif cmd[1] == "checkout":
+                if len(cmd) == 3:
+                    repo.git.checkout(cmd[2])
                             
         print("excecute ", *cmd[0:])
 
