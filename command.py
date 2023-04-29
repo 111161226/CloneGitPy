@@ -15,6 +15,9 @@ def excecute(cmd):
             else:
                 mess = "done commit"
             repo.index.commit(mess)
+        elif cmd[1] == "clone":
+            if len(cmd) == 3:
+                git.Git().clone(cmd[2])
         
         print("excecute ", cmd[0:])
 
