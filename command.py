@@ -23,8 +23,9 @@ def excecute(cmd):
             elif cmd[1] == "remote":
                 if len(cmd) == 5 and cmd[2] == "add":
                     repo.create_remote(cmd[3], cmd[4])
-                    with open('pic.bin', 'wb') as p:
+                    with open('name.bin', 'wb') as p:
                         pickle.dump(cmd[3], p)
+                    with open('url.bin', 'wb') as p:
                         pickle.dump(cmd[4], p)
             elif cmd[1] == "push":
                 if 4 <= len(cmd) <= 5:
@@ -50,6 +51,12 @@ def excecute(cmd):
             elif cmd[1] == "merge":
                 if len(cmd) == 3:
                     repo.index.merge_tree(cmd[2]).commit('merged')
+            elif cmd[1] == "pull":
+                with open('name.bin', 'rb') as p:
+                    name = pickle.load(p)
+                with open('url.bin', 'rb') as p:
+                    url = pickle.load(p)
+                repo.create_remote(name, url)
                             
         print("excecute ", *cmd[0:])
 
