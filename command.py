@@ -22,7 +22,12 @@ def excecute(cmd):
             elif cmd[1] == "remote":
                 if len(cmd) == 5 and cmd[2] == "add":
                     repo.create_remote(cmd[3], cmd[4])
-        
+            elif cmd[1] == "push":
+                if 4 <= len(cmd) <= 5:
+                    if len(cmd) == 5 and cmd[3] == "--delete":
+                        repo.git.push('--delete', cmd[2], cmd[4])
+                    else:
+                        repo.git.push(cmd[2], cmd[3])
         print("excecute ", *cmd[0:])
 
     else:
