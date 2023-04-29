@@ -1,4 +1,5 @@
 import git
+import pickle
 
 def excecute(cmd):
     if cmd[0] == "git":
@@ -22,6 +23,9 @@ def excecute(cmd):
             elif cmd[1] == "remote":
                 if len(cmd) == 5 and cmd[2] == "add":
                     repo.create_remote(cmd[3], cmd[4])
+                    with open('pic.bin', 'wb') as p:
+                        pickle.dump(cmd[3], p)
+                        pickle.dump(cmd[4], p)
             elif cmd[1] == "push":
                 if 4 <= len(cmd) <= 5:
                     if len(cmd) == 5 and cmd[3] == "--delete":
